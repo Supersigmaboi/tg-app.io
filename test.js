@@ -1,5 +1,10 @@
-const tg = window.Telegram.WebApp;
-const user = tg.initDataUnsafe.user;
+const user = window.Telegram?.WebApp?.initDataUnsafe?.user;
 
-console.log(user.id);       // появится в консоли браузера
-console.log(user.username); // появится в консоли браузера
+if (user) {
+  document.body.innerHTML = `
+    <p>ID: ${user.id}</p>
+    <p>Ник: @${user.username || 'нет никнейма'}</p>
+  `;
+} else {
+  document.body.innerHTML = '<p>Открой в Telegram</p>';
+}
