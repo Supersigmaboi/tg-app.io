@@ -1,14 +1,353 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
 }
 
-body {
-    background: #0a0a0a;
-    min-height: 100vh;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+body{
+  background-color: rgb(10, 10, 10);
+  height: 100%;       
+  overflow: hidden;  
+  font-family: "Poppins", sans-serif;
 }
+
+
+ /*   <!--Кнопка флага-->*/
+.lang-switcher-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: #1e1e1e;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  outline: none;
+  transition: transform 0.1s ease-in-out;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lang-switcher-btn{
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.lang-switcher-btn:hover{
+  background: #2a2a2a;
+}
+
+.lang-switcher-btn:active {
+  transform: scale(0.92);
+}
+
+.flag-emoji {
+  font-size: 26px;
+  line-height: 1;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/*   <!--/Кнопка флага--> */
+
+
+
+ /*   <!--Кнопка звука-->*/
+.sound-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  background: #1e1e1e;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.1s;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  color: #888;
+}
+
+.sound-btn{
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.sound-btn:hover {
+  background: #2a2a2a;
+}
+
+.sound-btn:active {
+  transform: scale(0.92);
+}
+
+.sound-btn i {
+  font-size: 22px;
+  pointer-events: none;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(0);
+  animation: ripple 0.35s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+ /*   <!--/Кнопка звука-->*/
+
+
+
+ /*   <!--/Данные пользователя-->*/
+ .userName{
+  color: white;
+  margin-top: 16px;
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 0 10px;
+  font-size: 22px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: -0.3px;
+}
+
+.userIcon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: -60px;
+}
+
+ .userIcon img{
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.209);
+  object-fit: cover;
+ }
+ /*   <!--Данные пользователя-->*/
+
+
+
+.deposit-and-balance{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+   /* <!--Кнопка пополнить--> */
+   .deposit-btn {
+  width: 50%;
+  flex: 1;
+  background-color: #2481cc;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 64px;
+  font-size: 14px;
+  font-family: sans-serif;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  box-sizing: border-box;
+  
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.deposit-btn:active{
+  background-color: #2072b5;
+}
+
+   /* <!--/Кнопка пополнить--> */
+
+
+
+   /* <!--Таб баланс--> */
+   .balance-btn{
+    width: 50%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+    background-color: #151515;
+    padding: 6px 64px;
+    border-radius: 50px;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+   }
+
+   .ton-sym{
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+   }
+   /* <!--/Таб баланс--> */
+
+
+
+ /* <!--Таб стата,инвентарь--> */
+ .tabs-container {
+  background: #1c1c1e;
+  border-radius: 12px;
+  padding: 4px;
+  display: flex;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  background: transparent;
+  color: #888;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  user-select: none;
+}
+
+.tab-btn:focus,
+.tab-btn:focus-visible,
+.tab-btn:active {
+  outline: none;
+  background: transparent;
+  color: #888;
+}
+
+.tab-btn.active {
+  background: #2c2c2e;
+  color: #fff;
+}
+
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: #3b82f6;
+  border-radius: 2px;
+}
+
+.tab-btn.active:focus,
+.tab-btn.active:focus-visible,
+.tab-btn.active:active {
+  background: #2c2c2e !important;
+  color: #fff !important;
+  outline: none;
+}
+
+.panel {
+  display: none;
+}
+
+.panel.active {
+  display: block;
+}
+ /* <!--/Таб стата,инвентарь--> */
+
+
+
+  /* <!--Инвентарь--> */
+  /* Контейнер строки инвентаря */
+.inv-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* Блок текста */
+.inv-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 10px;
+}
+
+.inven {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.count-items {
+  font-size: 13px;
+  color: #555555;
+  font-weight: 500;
+}
+
+/* Кнопка "Продать всё" */
+.sell-all-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* Небольшой отступ между иконкой и текстом */
+  background-color: #151517;
+  color: #e5e5e7;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  padding: 12px 22px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 15px;
+  margin-right: -10px;
+}
+
+/* Стилизация самой иконки внутри кнопки */
+.sell-all-btn .ti {
+  font-size: 20px; /* Оптимальный размер для этой иконки */
+  line-height: 1;
+}
+
+.sell-all-btn:active {
+  background-color: #252528;
+}
+
+   /* <!--/Инвентарь--> */
 
 .nav-bar {
     position: fixed;
