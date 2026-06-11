@@ -13,6 +13,83 @@
 </head>
 <body>
 
+  <!--Кнопка флага-->
+  <button id="langBtn" class="lang-switcher-btn" onclick="toggleLanguage()">
+    <span id="flagEmoji" class="flag-emoji"><img
+  src="https://flagcdn.com/16x12/ru.png"
+  width="18"
+  height="14"
+  alt="Russia"></span>
+  </button>
+  <!--/Кнопка флага-->
+
+
+
+  <!--Кнопка звука-->
+  <button class="sound-btn" id="soundBtn" aria-label="Звук 0%">
+    <i class="ti ti-volume-off"></i>
+  </button>
+  <!--/Кнопка звука-->
+
+
+
+<!--Данные пользователя-->
+<div id="user-icon" class="userIcon"></div>
+<div id="user-info" class="userName"></div>
+<!--/Данные пользователя-->
+
+
+<div class="deposit-and-balance">
+  <!--Кнопка пополнить-->
+  <button class="deposit-btn">
+      <span data-ru="Пополнить" data-en="Deposit">Пополнить</span>
+  </button>
+  <!--/Кнопка пополнить-->
+
+
+
+  <!--Таб баланс-->
+<div class="balance-btn">
+  <img src="static/img/ton-symvol.png" alt="ton-img" class="ton-sym">
+  <span>0.00 TON</span>
+</div>
+<!--/Таб баланс-->
+  </div>
+
+
+
+<!--/Таб стата,инвентарь-->
+<div class="tabs-container">
+  <button class="tab-btn active" onclick="switchTab('inventory')" data-ru = 'Инвентарь' data-en = 'Inventory'>Инвентарь</button>
+  <button class="tab-btn" onclick="switchTab('stats')" data-ru="Статистика" data-en="Statistics">Статистика</button>
+</div>
+
+<div id="tab-inventory" class="panel active">
+  <!-- содержимое инвентаря -->
+</div>
+
+<div id="tab-stats" class="panel">
+  <!-- содержимое статистики -->
+</div>
+<!--/Таб стата,инвентарь-->
+
+
+
+<!--Инвентарь-->
+<div class="inv-header">
+  <div class="inv-info">
+    <h2 class="inven" data-ru = 'Инвентарь' data-en = 'Inventory'>Инвентарь</h2>
+    <span class="count-items" data-ru = 'Предметов: 0' data-en = 'Items: 0'>Предметов: 0</span>
+  </div>
+  <button class="sell-all-btn">
+    <i class="ti ti-shopping-bag"></i>
+    <span data-ru = 'Продать всё' data-en = 'Sell everything'>Продать всё</span>
+  </button>
+</div>
+<!--/Инвентарь-->
+
+
+
 <nav class="nav-bar" role="navigation" aria-label="Главное меню">
 
     <button class="nav-item"
