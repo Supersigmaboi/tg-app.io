@@ -1,151 +1,577 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BlazeGift.up</title>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://telegram.org"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent !important;
+            -webkit-touch-callout: none;
+        }
+
+        html, body {
+            height: 100%;
+            background-color: #0a0a0a;
+            font-family: "Poppins", sans-serif;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        button, a {
+            -webkit-tap-highlight-color: transparent !important;
+            outline: none !important;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        button:focus, button:active, button:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        /* ── LAYOUT ── */
+        .page-content {
+            padding-bottom: 84px;
+            width: 100%;
+        }
+
+        /* ── TOP SECTION ── */
+        .top-section {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 14px 14px 0;
+            gap: 0;
+        }
+
+        /* Кнопки флаг + звук — вертикально слева */
+        .side-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        /* Аватар + имя — по центру страницы */
+        .profile-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        /* ── ICON BUTTONS ── */
+        .icon-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #1e1e1e;
+            border: 1.5px solid rgba(255,255,255,0.14);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            outline: none !important;
+            transition: transform 0.1s, background 0.15s;
+            -webkit-tap-highlight-color: transparent !important;
+            color: #888;
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+        }
+        .icon-btn:hover   { background: #2a2a2a; }
+        .icon-btn:active  { transform: scale(0.90); background: #2a2a2a; }
+        .icon-btn:focus   { outline: none !important; }
+
+        .flag-emoji {
+            font-size: 22px;
+            line-height: 1;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .icon-btn i { font-size: 20px; pointer-events: none; }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.1);
+            transform: scale(0);
+            animation: ripple 0.35s ease-out forwards;
+            pointer-events: none;
+        }
+        @keyframes ripple { to { transform: scale(2.2); opacity: 0; } }
+
+        /* ── AVATAR ── */
+        .avatar-wrap {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 2.5px solid rgba(255,255,255,0.18);
+            overflow: hidden;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .avatar-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .avatar-placeholder {
+            color: #444;
+            font-size: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ── USERNAME ── */
+        .user-name {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            margin-top: 10px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* ── DEPOSIT + BALANCE ── */
+        .action-row {
+            display: flex;
+            gap: 8px;
+            padding: 16px 12px 0;
+        }
+
+        .deposit-btn {
+            flex: 1;
+            background: #2481cc;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            padding: 13px 0;
+            font-size: 14px;
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            outline: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+            user-select: none;
+        }
+        .deposit-btn:active { background: #1e6faa; transform: scale(0.97); }
+
+        .balance-chip {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            background: #151515;
+            border-radius: 50px;
+            padding: 13px 0;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            border: 1.5px solid rgba(255,255,255,0.1);
+            user-select: none;
+        }
+
+        .ton-icon {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+
+        /* ── TABS ── */
+        .tabs-wrap {
+            padding: 14px 12px 0;
+        }
+
+        .tabs-container {
+            background: #1c1c1e;
+            border-radius: 12px;
+            padding: 4px;
+            display: flex;
+            border: 1.5px solid rgba(255,255,255,0.12);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px 0;
+            border: none;
+            background: transparent;
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: "Poppins", sans-serif;
+            border-radius: 9px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            outline: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+            user-select: none;
+        }
+        .tab-btn:focus, .tab-btn:active { outline: none !important; }
+
+        .tab-btn.active {
+            background: #2c2c2e;
+            color: #fff;
+        }
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: #3b82f6;
+            border-radius: 2px;
+        }
+
+        .panel { display: none; }
+        .panel.active { display: block; }
+
+        /* ── INVENTORY HEADER ── */
+        .inv-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 12px 0;
+        }
+
+        .inv-info { display: flex; flex-direction: column; gap: 2px; }
+
+        .inven {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .count-items {
+            font-size: 12px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .sell-all-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #151517;
+            color: #e5e5e7;
+            border: 1.5px solid rgba(255,255,255,0.14);
+            border-radius: 14px;
+            padding: 11px 18px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: "Poppins", sans-serif;
+            cursor: pointer;
+            outline: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+            user-select: none;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .sell-all-btn:active { background: #252528; transform: scale(0.96); }
+        .sell-all-btn .ti { font-size: 18px; }
+
+        /* ── EMPTY STATE ── */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 50px 0 20px;
+            color: #3a3a3a;
+        }
+        .empty-state i { font-size: 48px; }
+        .empty-state p { font-size: 14px; font-weight: 500; }
+
+        /* ── NAV BAR ── */
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            background: #141414;
+            border-top: 0.5px solid #242424;
+            border-radius: 20px 20px 0 0;
+            padding: 8px 0 max(10px, env(safe-area-inset-bottom));
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            cursor: pointer;
+            flex: 1;
+            padding: 4px 0;
+            transition: transform 0.1s;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent !important;
+            border: none;
+            background: none;
+            outline: none !important;
+        }
+        .nav-item:active { transform: scale(0.88); }
+        .nav-item:focus  { outline: none !important; }
+
+        .icon-wrap {
+            width: 40px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            transition: background 0.2s;
+            position: relative;
+        }
+
+        .nav-item i {
+            font-size: 23px;
+            color: #4a4a4a;
+            transition: color 0.2s;
+        }
+
+        .nav-item span {
+            font-size: 10px;
+            color: #4a4a4a;
+            font-weight: 400;
+            font-family: "Poppins", sans-serif;
+            transition: color 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav-item.active .icon-wrap { background: rgba(255,160,0,0.13); }
+        .nav-item.active i,
+        .nav-item.active span { color: #ffa000; }
+        .nav-item.active span { font-weight: 600; }
+
+        .nav-item.active .icon-wrap::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 22px;
+            height: 3px;
+            background: #ffa000;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .badge {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            width: 8px;
+            height: 8px;
+            background: #e53935;
+            border-radius: 50%;
+            border: 1.5px solid #141414;
+        }
+    </style>
 </head>
 <body>
 
-  <!--Кнопка флага-->
-  <button id="langBtn" class="lang-switcher-btn" onclick="toggleLanguage()">
-    <span id="flagEmoji" class="flag-emoji"><img
-  src="https://flagcdn.com/16x12/ru.png"
-  width="18"
-  height="14"
-  alt="Russia"></span>
-  </button>
-  <!--/Кнопка флага-->
+<div class="page-content">
 
+    <!-- TOP SECTION: кнопки слева + аватар по центру -->
+    <div class="top-section">
 
+        <!-- Флаг и звук ВЕРТИКАЛЬНО -->
+        <div class="side-btns">
+            <button id="langBtn" class="icon-btn" onclick="toggleLanguage()" aria-label="Переключить язык">
+                <span id="flagEmoji" class="flag-emoji">
+                    <img src="https://flagcdn.com/16x12/ru.png" width="18" height="14" alt="Russia">
+                </span>
+            </button>
+            <button class="icon-btn" id="soundBtn" aria-label="Звук 0%">
+                <i class="ti ti-volume-off"></i>
+            </button>
+        </div>
 
-  <!--Кнопка звука-->
-  <button class="sound-btn" id="soundBtn" aria-label="Звук 0%">
-    <i class="ti ti-volume-off"></i>
-  </button>
-  <!--/Кнопка звука-->
+        <!-- Аватар + имя по центру -->
+        <div class="profile-center">
+            <div class="avatar-wrap" id="user-icon">
+                <div class="avatar-placeholder"><i class="ti ti-user"></i></div>
+            </div>
+            <div id="user-info" class="user-name">Night</div>
+        </div>
 
+        <!-- Пустой блок справа для симметрии -->
+        <div style="width:48px; flex-shrink:0;"></div>
 
+    </div>
 
-<!--Данные пользователя-->
-<div id="user-icon" class="userIcon"></div>
-<div id="user-info" class="userName"></div>
-<!--/Данные пользователя-->
+    <!-- DEPOSIT + BALANCE -->
+    <div class="action-row">
+        <button class="deposit-btn">
+            <span data-ru="Пополнить" data-en="Deposit">Пополнить</span>
+        </button>
+        <div class="balance-chip">
+            <svg class="ton-icon" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="28" cy="28" r="28" fill="#0098EA"/>
+                <path d="M37.5603 15.6277H18.4386C14.9228 15.6277 12.6928 19.4202 14.4603 22.4797L26.6457 43.9782C27.3139 45.1302 28.9937 45.1302 29.6547 43.9782L41.8474 22.4797C43.6149 19.4202 41.378 15.6277 37.5603 15.6277ZM26.2098 39.1811L23.9798 34.7511L17.1447 22.4797C16.8861 22.0271 17.2121 21.4534 17.7367 21.4534H26.2098V39.1811ZM38.8409 22.4797L32.0131 34.7511L29.7831 39.1811V21.4534H38.2561C38.7808 21.4534 39.1068 22.0271 38.8482 22.4797H38.8409Z" fill="white"/>
+            </svg>
+            <span>0.00 TON</span>
+        </div>
+    </div>
 
+    <!-- TABS -->
+    <div class="tabs-wrap">
+        <div class="tabs-container">
+            <button class="tab-btn active" onclick="switchTab('inventory')" data-ru="Инвентарь" data-en="Inventory">Инвентарь</button>
+            <button class="tab-btn" onclick="switchTab('stats')" data-ru="Статистика" data-en="Statistics">Статистика</button>
+        </div>
+    </div>
 
-<div class="deposit-and-balance">
-  <!--Кнопка пополнить-->
-  <button class="deposit-btn">
-      <span data-ru="Пополнить" data-en="Deposit">Пополнить</span>
-  </button>
-  <!--/Кнопка пополнить-->
+    <!-- INVENTORY PANEL -->
+    <div id="tab-inventory" class="panel active">
+        <div class="inv-header">
+            <div class="inv-info">
+                <h2 class="inven" data-ru="Инвентарь" data-en="Inventory">Инвентарь</h2>
+                <span class="count-items" data-ru="Предметов: 0" data-en="Items: 0">Предметов: 0</span>
+            </div>
+            <button class="sell-all-btn">
+                <i class="ti ti-shopping-bag"></i>
+                <span data-ru="Продать всё" data-en="Sell everything">Продать всё</span>
+            </button>
+        </div>
+        <div class="empty-state">
+            <i class="ti ti-box-off"></i>
+            <p data-ru="Инвентарь пуст" data-en="Inventory is empty">Инвентарь пуст</p>
+        </div>
+    </div>
 
+    <!-- STATS PANEL -->
+    <div id="tab-stats" class="panel">
+        <div class="empty-state">
+            <i class="ti ti-chart-bar-off"></i>
+            <p data-ru="Статистики пока нет" data-en="No statistics yet">Статистики пока нет</p>
+        </div>
+    </div>
 
-
-  <!--Таб баланс-->
-<div class="balance-btn">
-  <img src="static/img/ton-symvol.png" alt="ton-img" class="ton-sym">
-  <span>0.00 TON</span>
 </div>
-<!--/Таб баланс-->
-  </div>
 
-
-
-<!--/Таб стата,инвентарь-->
-<div class="tabs-container">
-  <button class="tab-btn active" onclick="switchTab('inventory')" data-ru = 'Инвентарь' data-en = 'Inventory'>Инвентарь</button>
-  <button class="tab-btn" onclick="switchTab('stats')" data-ru="Статистика" data-en="Statistics">Статистика</button>
-</div>
-
-<div id="tab-inventory" class="panel active">
-  <!-- содержимое инвентаря -->
-</div>
-
-<div id="tab-stats" class="panel">
-  <!-- содержимое статистики -->
-</div>
-<!--/Таб стата,инвентарь-->
-
-
-
-<!--Инвентарь-->
-<div class="inv-header">
-  <div class="inv-info">
-    <h2 class="inven" data-ru = 'Инвентарь' data-en = 'Inventory'>Инвентарь</h2>
-    <span class="count-items" data-ru = 'Предметов: 0' data-en = 'Items: 0'>Предметов: 0</span>
-  </div>
-  <button class="sell-all-btn">
-    <i class="ti ti-shopping-bag"></i>
-    <span data-ru = 'Продать всё' data-en = 'Sell everything'>Продать всё</span>
-  </button>
-</div>
-<!--/Инвентарь-->
-
-
-
-<nav class="nav-bar" role="navigation" aria-label="Главное меню">
-
-    <button class="nav-item"
-            data-page="blazeGift-giveaways.html"
-            onclick="navigate(this)"
-            aria-label="Розыгрыши">
+<!-- NAV BAR -->
+<nav class="nav-bar" role="navigation">
+    <button class="nav-item" data-page="blazeGift-giveaways.html" onclick="navigate(this)" aria-label="Розыгрыши">
         <div class="icon-wrap">
             <i class="ti ti-gift"></i>
             <span class="badge"></span>
         </div>
-        <span>Розыгрыши</span>
+        <span data-ru="Розыгрыши" data-en="Giveaways">Розыгрыши</span>
     </button>
-
-    <button class="nav-item"
-            data-page="blazeGift-earn.html"
-            onclick="navigate(this)"
-            aria-label="Заработать">
-        <div class="icon-wrap">
-            <i class="ti ti-coin"></i>
-        </div>
-        <span>Заработать</span>
+    <button class="nav-item" data-page="blazeGift-earn.html" onclick="navigate(this)" aria-label="Заработать">
+        <div class="icon-wrap"><i class="ti ti-coin"></i></div>
+        <span data-ru="Заработать" data-en="Earn">Заработать</span>
     </button>
-
-    <button class="nav-item active"
-            data-page="blazeGift-games.html"
-            onclick="navigate(this)"
-            aria-label="Игры">
-        <div class="icon-wrap">
-            <i class="ti ti-home"></i>
-        </div>
-        <span>Игры</span>
+    <button class="nav-item active" data-page="blazeGift-games.html" onclick="navigate(this)" aria-label="Игры">
+        <div class="icon-wrap"><i class="ti ti-home"></i></div>
+        <span data-ru="Игры" data-en="Games">Игры</span>
     </button>
-
-    <button class="nav-item"
-            data-page="blazeGift-leaderboard.html"
-            onclick="navigate(this)"
-            aria-label="Лидерборд">
-        <div class="icon-wrap">
-            <i class="ti ti-trophy"></i>
-        </div>
-        <span>Лидерборд</span>
+    <button class="nav-item" data-page="blazeGift-leaderboard.html" onclick="navigate(this)" aria-label="Лидерборд">
+        <div class="icon-wrap"><i class="ti ti-trophy"></i></div>
+        <span data-ru="Лидерборд" data-en="Leaderboard">Лидерборд</span>
     </button>
-
-    <button class="nav-item"
-            data-page="blazeGift-profile.html"
-            onclick="navigate(this)"
-            aria-label="Профиль">
-        <div class="icon-wrap">
-            <i class="ti ti-user"></i>
-        </div>
-        <span>Профиль</span>
+    <button class="nav-item" data-page="blazeGift-profile.html" onclick="navigate(this)" aria-label="Профиль">
+        <div class="icon-wrap"><i class="ti ti-user"></i></div>
+        <span data-ru="Профиль" data-en="Profile">Профиль</span>
     </button>
-
 </nav>
 
-<script src="test.js"></script>
+<script>
+// ── ЯЗЫК ──
+let currentLang = 'ru';
+const flags = {
+    ru: `<img src="https://flagcdn.com/16x12/ru.png" width="18" height="14" alt="Russia">`,
+    en: `<img src="https://flagcdn.com/16x12/us.png" width="18" height="14" alt="USA">`
+};
+
+function toggleLanguage() {
+    currentLang = currentLang === 'ru' ? 'en' : 'ru';
+    document.getElementById('flagEmoji').innerHTML = flags[currentLang];
+    // Меняем textContent — не меняет layout, нет сдвига
+    document.querySelectorAll('[data-ru]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + currentLang);
+    });
+}
+
+// ── ЗВУК ──
+const soundStates = [
+    { icon: 'ti-volume-off', label: '0%'  },
+    { icon: 'ti-volume-2',   label: '50%' },
+    { icon: 'ti-volume',     label: '100%'}
+];
+let soundIndex = 0;
+const soundBtn = document.getElementById('soundBtn');
+const soundIcon = soundBtn.querySelector('i');
+
+soundBtn.addEventListener('click', () => {
+    soundIndex = (soundIndex + 1) % soundStates.length;
+    soundIcon.className = 'ti ' + soundStates[soundIndex].icon;
+    soundBtn.setAttribute('aria-label', 'Звук ' + soundStates[soundIndex].label);
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    soundBtn.appendChild(ripple);
+    ripple.addEventListener('animationend', () => ripple.remove());
+});
+
+// ── ПОЛЬЗОВАТЕЛЬ ──
+const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
+const infoEl = document.getElementById('user-info');
+const iconEl = document.getElementById('user-icon');
+
+if (tgUser) {
+    infoEl.textContent = tgUser.first_name;
+    if (tgUser.photo_url) {
+        iconEl.innerHTML = `<img src="${tgUser.photo_url}" alt="avatar">`;
+    }
+} else {
+    infoEl.textContent = 'Night';
+}
+
+// ── ТАБЫ ──
+function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach((b, i) => {
+        b.classList.toggle('active', (i === 0 && tab === 'inventory') || (i === 1 && tab === 'stats'));
+    });
+    document.getElementById('tab-inventory').classList.toggle('active', tab === 'inventory');
+    document.getElementById('tab-stats').classList.toggle('active', tab === 'stats');
+}
+
+// ── НАВИГАЦИЯ ──
+function navigate(button) {
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    button.classList.add('active');
+    // window.location.href = button.dataset.page;
+}
+</script>
 
 </body>
 </html>
