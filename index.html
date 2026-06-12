@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>BlazeGift.up</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -38,8 +38,8 @@
         }
 
         .page-content {
-            padding-top: 70px;
-            padding-bottom: 110px;
+            padding-top: max(70px, calc(env(safe-area-inset-top) + 14px));
+            padding-bottom: calc(110px + env(safe-area-inset-bottom));
             width: 100%;
         }
 
@@ -462,8 +462,12 @@
 </nav>
 
 <script>
-// ── ПОЛЬЗОВАТЕЛЬ ──
+// ── ИНИЦИАЛИЗАЦИЯ TELEGRAM WEBAPP ──
 const tg = window.Telegram?.WebApp;
+if (tg) {
+    tg.ready();
+    tg.expand();
+}
 const tgUser = tg?.initDataUnsafe?.user;
 const infoEl = document.getElementById('user-info');
 const iconEl = document.getElementById('user-icon');
@@ -533,7 +537,7 @@ function switchTab(tab) {
 function navigate(button) {
     document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
     button.classList.add('active');
-    window.location.href = button.dataset.page;
+    // window.location.href = button.dataset.page;
 }
 </script>
 
