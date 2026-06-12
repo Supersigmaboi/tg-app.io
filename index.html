@@ -38,7 +38,7 @@
         }
 
         .page-content {
-            padding-top: 0;
+            padding-top: max(70px, calc(env(safe-area-inset-top) + 14px));
             padding-bottom: calc(110px + env(safe-area-inset-bottom));
             width: 100%;
         }
@@ -49,7 +49,6 @@
             flex-direction: row;
             align-items: flex-start;
             padding: 14px 14px 0;
-            padding-top: max(14px, env(safe-area-inset-top));
         }
 
         .side-btns {
@@ -468,18 +467,6 @@ const tg = window.Telegram?.WebApp;
 if (tg) {
     tg.ready();
     tg.expand();
-
-    // Динамически выставляем отступ сверху через Telegram API
-    function applyTopPadding() {
-        const safeTop = tg.safeAreaInset?.top ?? 0;
-        const contentSafeTop = tg.contentSafeAreaInset?.top ?? 0;
-        const topPad = Math.max(safeTop, contentSafeTop, 14);
-        document.querySelector('.top-section').style.paddingTop = topPad + 'px';
-    }
-
-    applyTopPadding();
-    tg.onEvent('safeAreaChanged', applyTopPadding);
-    tg.onEvent('contentSafeAreaChanged', applyTopPadding);
 }
 const tgUser = tg?.initDataUnsafe?.user;
 const infoEl = document.getElementById('user-info');
@@ -552,6 +539,14 @@ function navigate(button) {
     button.classList.add('active');
     window.location.href = button.dataset.page;
 }
+
+// ── BROWSER GUARD ──
+(function() {
+    const isTelegram = window.Telegram?.WebApp?.initData && window.Telegram.WebApp.initData.length > 0;
+    if (!isTelegram) {
+        window.location.replace("https://t.me/Apishirp_bot?startapp");
+    }
+})();
 </script>
 
 </body>
