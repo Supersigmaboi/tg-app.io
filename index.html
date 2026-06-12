@@ -159,7 +159,7 @@
 
         .deposit-btn {
             flex: 1;
-            background: #2481cc;
+            background: #cb8a19;
             color: #fff;
             border: none;
             border-radius: 50px;
@@ -173,7 +173,7 @@
             -webkit-tap-highlight-color: transparent !important;
             user-select: none;
         }
-        .deposit-btn:active { background: #1e6faa; transform: scale(0.97); }
+        .deposit-btn:active { background: #a57015; transform: scale(0.97); }
 
         .balance-chip {
             flex: 1;
@@ -231,7 +231,7 @@
             transform: translateX(-50%);
             width: 50px;
             height: 2px;
-            background: #3b82f6;
+            background: #ffa000;
             border-radius: 2px;
         }
 
@@ -254,8 +254,8 @@
             align-items: center;
             gap: 6px;
             background: #151517;
-            color: #e5e5e7;
-            border: 1.5px solid rgba(255,255,255,0.14);
+            color: #cb8a19;
+            border: 1.5px solid #b57c1a;
             border-radius: 14px;
             padding: 11px 18px;
             font-size: 14px;
@@ -278,7 +278,7 @@
             justify-content: center;
             gap: 10px;
             padding: 50px 0 20px;
-            color: #3a3a3a;
+            color: #6e4b0a;
         }
         .empty-state i { font-size: 48px; }
         .empty-state p { font-size: 14px; font-weight: 500; }
@@ -447,7 +447,7 @@
         <div class="icon-wrap"><i class="ti ti-coin"></i></div>
         <span data-ru="Заработать" data-en="Earn">Заработать</span>
     </button>
-    <button class="nav-item active" data-page="blazeGift-games.html" onclick="navigate(this)">
+    <button class="nav-item" data-page="blazeGift-games.html" onclick="navigate(this)">
         <div class="icon-wrap"><i class="ti ti-home"></i></div>
         <span data-ru="Игры" data-en="Games">Игры</span>
     </button>
@@ -455,7 +455,7 @@
         <div class="icon-wrap"><i class="ti ti-trophy"></i></div>
         <span data-ru="Лидерборд" data-en="Leaderboard">Лидерборд</span>
     </button>
-    <button class="nav-item" data-page="blazeGift-profile.html" onclick="navigate(this)">
+    <button class="nav-item  active" data-page="blazeGift-profile.html" onclick="navigate(this)">
         <div class="icon-wrap"><i class="ti ti-user"></i></div>
         <span data-ru="Профиль" data-en="Profile">Профиль</span>
     </button>
@@ -533,7 +533,7 @@ function switchTab(tab) {
 function navigate(button) {
     document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
     button.classList.add('active');
-    // window.location.href = button.dataset.page;
+    window.location.href = button.dataset.page;
 }
 </script>
 
