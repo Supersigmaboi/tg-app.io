@@ -9,9 +9,19 @@
 <script>
 (function() {
     var tg = window.Telegram && window.Telegram.WebApp;
-    var isInTelegram = tg && (tg.initData && tg.initData.length > 0);
-    if (!isInTelegram) {
-        window.location.replace("https://t.me/Apishirp_bot?startapp");
+    var isInMiniApp = tg && tg.initData && tg.initData.length > 0;
+    
+    if (!isInMiniApp) {
+        var ua = navigator.userAgent || '';
+        var isTgBrowser = ua.indexOf('Telegram') !== -1 || ua.indexOf('TelegramBot') !== -1;
+        
+        if (isTgBrowser) {
+            // Telegram браузер — используем tg:// deep link
+            window.location.replace("tg://resolve?domain=Apishirp_bot&appname=Test&startapp=open");
+        } else {
+            // Обычный браузер
+            window.location.replace("https://t.me/Apishirp_bot?startapp");
+        }
     }
 })();
 </script>
