@@ -374,7 +374,7 @@
         <div class="side-btns">
             <button id="langBtn" class="icon-btn" onclick="toggleLanguage()" aria-label="Язык">
                 <span id="flagEmoji" class="flag-emoji">
-                    <img src="https://flagcdn.com/16x12/ru.png" width="18" height="14" alt="Russia">
+                    <span>🇷🇺</span>
                 </span>
             </button>
             <button class="icon-btn" id="soundBtn" aria-label="Звук 0%">
@@ -484,8 +484,8 @@ if (tgUser) {
 // ── ЯЗЫК ──
 let currentLang = 'ru';
 const flags = {
-    ru: `<img src="https://flagcdn.com/16x12/ru.png" width="18" height="14" alt="Russia">`,
-    en: `<img src="https://flagcdn.com/16x12/us.png" width="18" height="14" alt="USA">`
+    ru: `🇷🇺`,
+    en: `🇺🇸`
 };
 
 function toggleLanguage() {
