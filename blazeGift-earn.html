@@ -718,7 +718,7 @@ document.getElementById('copyBtn').addEventListener('click', function() {
 document.getElementById('inviteBtn').addEventListener('click', function() {
     const tg = window.Telegram?.WebApp;
     const userId = tg?.initDataUnsafe?.user?.id ?? '0';
-    const link = 'https://t.me/blazegiftbot?start=' + userId;
+    const link = 'https://t.me/blazegifts_bot?start=' + userId;
     const text = encodeURIComponent('Заходи в BlazeGift и получай NFT-подарки! 🎁');
     if (tg) {
         tg.openTelegramLink('https://t.me/share/url?url=' + encodeURIComponent(link) + '&text=' + text);
