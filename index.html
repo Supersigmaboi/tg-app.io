@@ -363,10 +363,6 @@
             background: #e53935;
             border-radius: 50%;
             border: 1.5px solid #141414;
-
-        #tab-stats .empty-state {
-            padding-top: 64px;
-            }
         }
     </style>
 </head>
@@ -433,12 +429,19 @@
         </div>
     </div>
 
-    <div id="tab-stats" class="panel">
-        <div class="empty-state">
-            <i class="ti ti-chart-bar-off"></i>
-            <p data-ru="Статистики пока нет" data-en="No statistics yet">Статистики пока нет</p>
+<div id="tab-stats" class="panel">
+    <div class="inv-header" style="visibility:hidden;">
+        <div class="inv-info">
+            <h2 class="inven">.</h2>
+            <span class="count-items">.</span>
         </div>
+        <button class="sell-all-btn"><i class="ti ti-shopping-bag"></i><span>.</span></button>
     </div>
+    <div class="empty-state">
+        <i class="ti ti-chart-bar-off"></i>
+        <p data-ru="Статистики пока нет" data-en="No statistics yet">Статистики пока нет</p>
+    </div>
+</div>
 
 </div>
 
