@@ -15,6 +15,7 @@
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent !important;
             -webkit-touch-callout: none;
+            touch-action: manipulation;
         }
 
         html, body {
@@ -82,8 +83,9 @@
             -webkit-tap-highlight-color: transparent !important;
             color: #888;
             position: relative;
-            overflow: hidden;
+            clip-path: circle(50%);
             user-select: none;
+            touch-action: manipulation;
         }
         .icon-btn:hover   { background: #2a2a2a; }
         .icon-btn:active  { transform: scale(0.90); background: #1e1e1e !important; }
@@ -172,6 +174,7 @@
             outline: none !important;
             -webkit-tap-highlight-color: transparent !important;
             user-select: none;
+            touch-action: manipulation;
         }
         .deposit-btn:active { background: #a57015; transform: scale(0.97); }
 
@@ -221,6 +224,7 @@
             outline: none !important;
             -webkit-tap-highlight-color: transparent !important;
             user-select: none;
+            touch-action: manipulation;
         }
         .tab-btn.active { background: #2c2c2e; color: #fff; }
         .tab-btn.active::after {
@@ -313,6 +317,7 @@
             border: none;
             background: none;
             outline: none !important;
+            touch-action: manipulation;
         }
         .nav-item:active { transform: scale(0.88); }
 
@@ -373,9 +378,7 @@
     <div class="top-section">
         <div class="side-btns">
             <button id="langBtn" class="icon-btn" onclick="toggleLanguage()" aria-label="Язык">
-                <span id="flagEmoji" class="flag-emoji">
-                    <span>🇷🇺</span>
-                </span>
+                <span id="flagEmoji" class="flag-emoji">🇷🇺</span>
             </button>
             <button class="icon-btn" id="soundBtn" aria-label="Звук 0%">
                 <i class="ti ti-volume-off"></i>
@@ -497,7 +500,7 @@ const flags = {
 
 function toggleLanguage() {
     currentLang = currentLang === 'ru' ? 'en' : 'ru';
-    document.getElementById('flagEmoji').innerHTML = flags[currentLang];
+    document.getElementById('flagEmoji').textContent = flags[currentLang];
     document.querySelectorAll('[data-ru]').forEach(el => {
         el.textContent = el.getAttribute('data-' + currentLang);
     });
@@ -510,6 +513,7 @@ function toggleLanguage() {
 // ── ЗВУК ──
 const soundStates = [
     { icon: 'ti-volume-off', label: '0%'  },
+    { icon: 'ti-volume-2',   label: '50%' },
     { icon: 'ti-volume',     label: '100%'}
 ];
 let soundIndex = 0;
