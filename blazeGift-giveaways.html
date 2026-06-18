@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BlazeGift.up — Розыгрыши</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js">
+document.addEventListener('touchstart', function(){}, { passive: true });
+
+</script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
@@ -23,17 +26,6 @@
             font-family: "Poppins", sans-serif;
             overflow-x: hidden;
             overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* старый Edge/IE */
-        }
-
-        html::-webkit-scrollbar,
-        body::-webkit-scrollbar {
-            display: none;
-            width: 0;
-            height: 0;
-            background: transparent;
         }
 
         button, a {
@@ -460,9 +452,18 @@
             border-radius: 50%;
             border: 1.5px solid #141414;
         }
-    </style>
+    
+.deposit-btn,
+.avatar-wrap,
+.nav-item,
+.tab-btn,
+.giveaway-join-btn {
+    touch-action: manipulation;
+}
+
+</style>
 </head>
-<body>
+<body ontouchstart="">
 
 <div class="page-content">
 
@@ -630,6 +631,9 @@ function navigate(button) {
     button.classList.add('active');
     window.location.href = button.dataset.page;
 }
+
+document.addEventListener('touchstart', function(){}, { passive: true });
+
 </script>
 
 </body>
