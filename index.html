@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BlazeGift.up</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js">
+document.addEventListener('touchstart', function(){}, {passive:true});
+
+</script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
@@ -15,7 +18,6 @@
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent !important;
             -webkit-touch-callout: none;
-            touch-action: manipulation;
         }
 
         html, body {
@@ -83,9 +85,8 @@
             -webkit-tap-highlight-color: transparent !important;
             color: #888;
             position: relative;
-            clip-path: circle(50%);
+            overflow: hidden;
             user-select: none;
-            touch-action: manipulation;
         }
         .icon-btn:hover   { background: #2a2a2a; }
         .icon-btn:active  { transform: scale(0.90); background: #1e1e1e !important; }
@@ -174,7 +175,6 @@
             outline: none !important;
             -webkit-tap-highlight-color: transparent !important;
             user-select: none;
-            touch-action: manipulation;
         }
         .deposit-btn:active { background: #a57015; transform: scale(0.97); }
 
@@ -224,7 +224,6 @@
             outline: none !important;
             -webkit-tap-highlight-color: transparent !important;
             user-select: none;
-            touch-action: manipulation;
         }
         .tab-btn.active { background: #2c2c2e; color: #fff; }
         .tab-btn.active::after {
@@ -317,7 +316,6 @@
             border: none;
             background: none;
             outline: none !important;
-            touch-action: manipulation;
         }
         .nav-item:active { transform: scale(0.88); }
 
@@ -369,7 +367,17 @@
             border-radius: 50%;
             border: 1.5px solid #141414;
         }
-    </style>
+    
+.deposit-btn,
+.sell-all-btn,
+.icon-btn,
+.tab-btn,
+.nav-item {
+    -webkit-touch-callout: none;
+    touch-action: manipulation;
+}
+
+</style>
 </head>
 <body>
 
@@ -378,7 +386,9 @@
     <div class="top-section">
         <div class="side-btns">
             <button id="langBtn" class="icon-btn" onclick="toggleLanguage()" aria-label="Язык">
-                <span id="flagEmoji" class="flag-emoji">🇷🇺</span>
+                <span id="flagEmoji" class="flag-emoji">
+                    <span>🇷🇺</span>
+                </span>
             </button>
             <button class="icon-btn" id="soundBtn" aria-label="Звук 0%">
                 <i class="ti ti-volume-off"></i>
@@ -500,7 +510,7 @@ const flags = {
 
 function toggleLanguage() {
     currentLang = currentLang === 'ru' ? 'en' : 'ru';
-    document.getElementById('flagEmoji').textContent = flags[currentLang];
+    document.getElementById('flagEmoji').innerHTML = flags[currentLang];
     document.querySelectorAll('[data-ru]').forEach(el => {
         el.textContent = el.getAttribute('data-' + currentLang);
     });
@@ -545,6 +555,9 @@ function navigate(button) {
     button.classList.add('active');
     window.location.href = button.dataset.page;
 }
+
+document.addEventListener('touchstart', function(){}, {passive:true});
+
 </script>
 
 </body>
