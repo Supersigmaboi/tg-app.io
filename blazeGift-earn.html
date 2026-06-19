@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BlazeGift.up</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js">
+        document.addEventListener('touchstart', function(){}, { passive: true });
+    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
@@ -36,7 +38,7 @@
     padding-top: 80px;
 }
 
-        /* ── КНОПКА ПОПОЛНИТЬ ── */
+        /* ── Пополнить бтн ── */
         .deposit-btn {
             background: #cb8a19;
             border: none;
@@ -58,7 +60,7 @@
             transform: scale(0.96);
         }
 
-        /* ── БАЛАНС ── */
+        /* ── баланс ── */
         .balance-chip {
             display: flex;
             align-items: center;
@@ -85,7 +87,7 @@
             flex-shrink: 0;
         }
 
-        /* ── АВАТАРКА ── */
+        /* ── аватарка ── */
         .avatar-wrap {
             width: 52px;
             height: 52px;
@@ -144,7 +146,7 @@
     width: 100%;
         }
 
-        /* TABS */
+        /* верх таб */
         .tabs-wrap { padding: 14px 12px 0; }
 
         .tabs-container {
@@ -188,7 +190,7 @@
         .panel { display: none; }
         .panel.active { display: block; }
 
-        /* HERO CARD */
+        /* верхняя часть*/
         .hero-card {
             margin: 16px 12px 0;
             background: #141414;
@@ -307,7 +309,7 @@
             cursor: default;
         }
 
-        /* REF SECTION */
+        /* рефка */
         .ref-section { padding: 16px 12px 0; display: flex; flex-direction: column; gap: 12px; }
 
         .ref-hero-card {
@@ -390,7 +392,6 @@
             border-top: 1px solid rgba(255,255,255,0.06);
         }
 
-        /* ── FIX: иконка "Всего заработано" — синяя ── */
         .ref-stat-icon {
             width: 36px; height: 36px;
             border-radius: 50%;
@@ -448,7 +449,7 @@
             color: #fff; font-size: 14px; font-weight: 700; flex-shrink: 0;
         }
 
-        /* NAV BAR */
+        /* нижний бар */
         .nav-bar {
             position: fixed;
             bottom: 0; left: 0; right: 0;
@@ -526,7 +527,7 @@
 }
     </style>
 </head>
-<body>
+<body ontouchstart="">
 
   <div class="topbar">
     <button class="deposit-btn">Пополнить</button>
