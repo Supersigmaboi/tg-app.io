@@ -48,6 +48,7 @@
             padding: 14px;
             padding-top: 80px;
             background: #0a0a0a;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         /* compensate for fixed topbar */
@@ -357,7 +358,7 @@
         /* ── YOUR POSITION — FIXED ── */
         .lb-my-bar {
             position: fixed;
-            bottom: calc(max(28px, env(safe-area-inset-bottom)) + 8px + 55px);
+            bottom: calc(74px + env(safe-area-inset-bottom));
             left: 0; right: 0;
             z-index: 150;
             background: #0f0f0f;
@@ -386,9 +387,7 @@
         /* ── NAV BAR ── */
         .nav-bar {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             display: flex;
             align-items: center;
             justify-content: space-around;
@@ -417,11 +416,8 @@
         .nav-item:active { transform: scale(0.88); }
 
         .icon-wrap {
-            width: 40px;
-            height: 34px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 40px; height: 34px;
+            display: flex; align-items: center; justify-content: center;
             border-radius: 12px;
             transition: background 0.2s;
             position: relative;
@@ -429,37 +425,28 @@
 
         .nav-item i { font-size: 23px; color: #4a4a4a; transition: color 0.2s; }
         .nav-item span {
-            font-size: 10px;
-            color: #4a4a4a;
-            font-weight: 400;
-            font-family: "Poppins", sans-serif;
-            transition: color 0.2s;
-            white-space: nowrap;
+            font-size: 10px; color: #4a4a4a;
+            font-weight: 400; font-family: "Poppins", sans-serif;
+            transition: color 0.2s; white-space: nowrap;
         }
 
-        .nav-item.active .icon-wrap { background: rgba(255,160,0,0.13); }
-        .nav-item.active i,
-        .nav-item.active span { color: #ffa000; }
+        .nav-item.active .icon-wrap { background: rgba(203,138,25,0.13); }
+        .nav-item.active i, .nav-item.active span { color: #cb8a19; }
         .nav-item.active span { font-weight: 600; }
 
         .nav-item.active .icon-wrap::before {
             content: '';
             position: absolute;
-            top: -8px;
-            left: 50%;
+            top: -8px; left: 50%;
             transform: translateX(-50%);
-            width: 22px;
-            height: 3px;
-            background: #ffa000;
+            width: 22px; height: 3px;
+            background: #cb8a19;
             border-radius: 0 0 4px 4px;
         }
 
         .badge {
-            position: absolute;
-            top: 1px;
-            right: 1px;
-            width: 8px;
-            height: 8px;
+            position: absolute; top: 1px; right: 1px;
+            width: 8px; height: 8px;
             background: #e53935;
             border-radius: 50%;
             border: 1.5px solid #141414;
