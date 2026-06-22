@@ -43,12 +43,21 @@ document.addEventListener('touchstart', function(){}, { passive: true });
 
         /* ── TOP BAR ── */
         .topbar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px;
-    background: #0a0a0a;
-    padding-top: 80px;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px;
+            padding-top: 80px;
+            background: #0a0a0a;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* compensate for fixed topbar */
+        .topbar-spacer {
+            height: calc(80px + 52px + 14px);
         }
             
 
@@ -465,10 +474,8 @@ document.addEventListener('touchstart', function(){}, { passive: true });
 </head>
 <body ontouchstart="">
 
-<div class="page-content">
-
-    <!-- TOP BAR -->
-    <div class="topbar">
+<!-- TOP BAR (fixed) -->
+<div class="topbar">
     <button class="deposit-btn">Пополнить</button>
 
     <div class="balance-chip">
@@ -482,7 +489,12 @@ document.addEventListener('touchstart', function(){}, { passive: true });
     <div class="avatar-wrap" id="user-icon" onclick="window.location.href='index.html'">
         <div class="avatar-placeholder"><i class="ti ti-user"></i></div>
     </div>
-  </div>
+</div>
+
+<!-- spacer for fixed topbar -->
+<div class="topbar-spacer"></div>
+
+<div class="page-content">
 
     <!-- TABS -->
     <div class="tabs-wrap">
