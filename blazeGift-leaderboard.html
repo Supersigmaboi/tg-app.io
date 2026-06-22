@@ -374,56 +374,55 @@
         }
 
         .lb-row.mine {
-            border-color: rgba(255,255,255,0.12);
-            background: rgba(48, 59, 65, 0.07);
+            border: 2px solid rgba(0, 152, 234, 0.6);
+            background: rgba(0, 152, 234, 0.07);
+            box-shadow: 0 0 12px rgba(0, 152, 234, 0.15);
             margin: 0;
         }
 
-        .lb-rank-num.blue { color: #c9c9c9; font-size: 15px; }
+        .lb-rank-num.blue { color: #0098EA; font-size: 15px; }
 
         /* ── NAV BAR ── */
         .nav-bar {
             position: fixed;
             bottom: 0; left: 0; right: 0;
-            background: #141414;
-            border-top: 1.5px solid rgba(255,255,255,0.07);
             display: flex;
-            justify-content: space-around;
             align-items: center;
-            padding: 10px 0;
-            padding-bottom: max(10px, env(safe-area-inset-bottom));
+            justify-content: space-around;
+            background: #141414;
+            border-top: 0.5px solid #242424;
+            border-radius: 20px 20px 0 0;
+            padding: 8px 0 max(28px, env(safe-area-inset-bottom));
             z-index: 100;
-            height: auto;
-            min-height: 70px;
         }
 
         .nav-item {
-            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
-            background: none;
-            border: none;
+            gap: 3px;
             cursor: pointer;
-            padding: 2px 0;
-            transition: opacity 0.15s;
+            flex: 1;
+            padding: 4px 0;
+            transition: transform 0.1s;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent !important;
+            border: none;
+            background: none;
+            outline: none !important;
         }
 
-        .nav-item:active { opacity: 0.7; }
+        .nav-item:active { transform: scale(0.88); }
 
         .icon-wrap {
-            width: 36px; height: 36px;
+            width: 40px; height: 34px;
+            display: flex; align-items: center; justify-content: center;
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
             transition: background 0.2s;
+            position: relative;
         }
 
-        .icon-wrap i { font-size: 22px; color: #4a4a4a; transition: color 0.2s; }
-
+        .nav-item i { font-size: 23px; color: #4a4a4a; transition: color 0.2s; }
         .nav-item span {
             font-size: 10px; color: #4a4a4a;
             font-weight: 400; font-family: "Poppins", sans-serif;
