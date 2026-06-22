@@ -133,8 +133,7 @@
         /* ── PAGE ── */
         .page-content {
             padding-top: 0;
-            /* bottom: nav bar (70px) + my-position bar (80px) */
-            padding-bottom: 190px;
+            padding-bottom: 110px;
             width: 100%;
         }
 
@@ -355,14 +354,12 @@
             flex-shrink: 0;
         }
 
-        /* ── YOUR POSITION — FIXED ── */
+        /* ── YOUR POSITION — inline ── */
         .lb-my-bar {
-            position: fixed;
-            bottom: calc(74px + env(safe-area-inset-bottom));
-            left: 0; right: 0;
-            z-index: 150;
+            margin: 8px 12px 0;
             background: #0f0f0f;
             border-top: 1.5px solid rgba(255,255,255,0.12);
+            border-radius: 16px;
             padding: 10px 12px;
         }
 
@@ -388,42 +385,45 @@
         .nav-bar {
             position: fixed;
             bottom: 0; left: 0; right: 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
             background: #141414;
-            border-top: 0.5px solid #242424;
-            border-radius: 20px 20px 0 0;
-            padding: 8px 0 max(28px, env(safe-area-inset-bottom));
+            border-top: 1.5px solid rgba(255,255,255,0.07);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            padding-bottom: max(10px, env(safe-area-inset-bottom));
             z-index: 100;
+            height: auto;
+            min-height: 70px;
         }
 
         .nav-item {
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 3px;
-            cursor: pointer;
-            flex: 1;
-            padding: 4px 0;
-            transition: transform 0.1s;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent !important;
-            border: none;
+            gap: 5px;
             background: none;
-            outline: none !important;
+            border: none;
+            cursor: pointer;
+            padding: 2px 0;
+            transition: opacity 0.15s;
         }
-        .nav-item:active { transform: scale(0.88); }
+
+        .nav-item:active { opacity: 0.7; }
 
         .icon-wrap {
-            width: 40px; height: 34px;
-            display: flex; align-items: center; justify-content: center;
+            width: 36px; height: 36px;
             border-radius: 12px;
-            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
+            transition: background 0.2s;
         }
 
-        .nav-item i { font-size: 23px; color: #4a4a4a; transition: color 0.2s; }
+        .icon-wrap i { font-size: 22px; color: #4a4a4a; transition: color 0.2s; }
+
         .nav-item span {
             font-size: 10px; color: #4a4a4a;
             font-weight: 400; font-family: "Poppins", sans-serif;
@@ -508,27 +508,27 @@
     <!-- LEADERBOARD LIST -->
     <div class="lb-list" id="lb-list"></div>
 
-</div>
-
-<!-- YOUR POSITION (fixed above nav bar) -->
-<div class="lb-my-bar">
-    <div class="lb-my-label">Ваша позиция</div>
-    <div class="lb-row mine">
-        <div class="lb-rank-wrap">
-            <span class="lb-rank-num blue" id="my-rank">145</span>
-        </div>
-        <div class="lb-avatar" id="my-avatar">
-            <i class="ti ti-user" style="font-size:20px;color:#555;"></i>
-        </div>
-        <div class="lb-name" id="my-name">Вы</div>
-        <div class="lb-amount">
-            <span id="my-amount">215.10</span>
-            <svg class="ton-icon-sm" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="28" cy="28" r="28" fill="#0098EA"/>
-                <path d="M37.5603 15.6277H18.4386C14.9228 15.6277 12.6928 19.4202 14.4603 22.4797L26.6457 43.9782C27.3139 45.1302 28.9937 45.1302 29.6547 43.9782L41.8474 22.4797C43.6149 19.4202 41.378 15.6277 37.5603 15.6277ZM26.2098 39.1811L23.9798 34.7511L17.1447 22.4797C16.8861 22.0271 17.2121 21.4534 17.7367 21.4534H26.2098V39.1811ZM38.8409 22.4797L32.0131 34.7511L29.7831 39.1811V21.4534H38.2561C38.7808 21.4534 39.1068 22.0271 38.8482 22.4797H38.8409Z" fill="white"/>
-            </svg>
+    <!-- YOUR POSITION (inline at the end) -->
+    <div class="lb-my-bar">
+        <div class="lb-my-label">Ваша позиция</div>
+        <div class="lb-row mine">
+            <div class="lb-rank-wrap">
+                <span class="lb-rank-num blue" id="my-rank">145</span>
+            </div>
+            <div class="lb-avatar" id="my-avatar">
+                <i class="ti ti-user" style="font-size:20px;color:#555;"></i>
+            </div>
+            <div class="lb-name" id="my-name">Вы</div>
+            <div class="lb-amount">
+                <span id="my-amount">215.10</span>
+                <svg class="ton-icon-sm" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="28" cy="28" r="28" fill="#0098EA"/>
+                    <path d="M37.5603 15.6277H18.4386C14.9228 15.6277 12.6928 19.4202 14.4603 22.4797L26.6457 43.9782C27.3139 45.1302 28.9937 45.1302 29.6547 43.9782L41.8474 22.4797C43.6149 19.4202 41.378 15.6277 37.5603 15.6277ZM26.2098 39.1811L23.9798 34.7511L17.1447 22.4797C16.8861 22.0271 17.2121 21.4534 17.7367 21.4534H26.2098V39.1811ZM38.8409 22.4797L32.0131 34.7511L29.7831 39.1811V21.4534H38.2561C38.7808 21.4534 39.1068 22.0271 38.8482 22.4797H38.8409Z" fill="white"/>
+                </svg>
+            </div>
         </div>
     </div>
+
 </div>
 
 <!-- NAV BAR -->
