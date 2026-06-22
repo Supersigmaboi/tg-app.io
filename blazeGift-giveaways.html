@@ -510,8 +510,8 @@ document.addEventListener('touchstart', function(){}, { passive: true });
     <!-- TABS -->
     <div class="tabs-wrap">
         <div class="tabs-container">
-            <button class="tab-btn" onclick="switchTab('finished')">Завершённые</button>
             <button class="tab-btn active" onclick="switchTab('active')">Активные</button>
+            <button class="tab-btn" onclick="switchTab('finished')">Завершённые</button>
         </div>
     </div>
 
@@ -604,7 +604,7 @@ if (tgUser?.photo_url) {
 // ── TABS ──
 function switchTab(tab) {
     document.querySelectorAll('.tab-btn').forEach((b, i) => {
-        b.classList.toggle('active', (i === 0 && tab === 'finished') || (i === 1 && tab === 'active'));
+        b.classList.toggle('active', (i === 0 && tab === 'active') || (i === 1 && tab === 'finished'));
     });
     document.getElementById('tab-active').classList.toggle('active', tab === 'active');
     document.getElementById('tab-finished').classList.toggle('active', tab === 'finished');
