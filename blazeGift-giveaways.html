@@ -216,29 +216,23 @@ document.addEventListener('touchstart', function(){}, { passive: true });
 
         /* ── HERO BANNER ── */
         .giveaway-hero {
-            margin: 14px 12px 0;
-            background: #141414;
-            border-radius: 18px;
-            border: 1.5px solid rgba(255,255,255,0.08);
+            padding: 16px 16px 0;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
-            padding: 24px;
-            gap: 12px;
-            overflow: hidden;
         }
 
         .giveaway-hero-text {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 4px;
         }
 
         .giveaway-hero-title {
             color: #fff;
-            font-size: 22px;
+            font-size: 30px;
             font-weight: 800;
-            line-height: 1.2;
+            line-height: 1.1;
         }
         .giveaway-hero-title span { color: #dd9417; }
 
@@ -246,10 +240,46 @@ document.addEventListener('touchstart', function(){}, { passive: true });
             color: #888;
             font-size: 13px;
             font-weight: 400;
-            line-height: 1.5;
+            margin-top: 4px;
         }
 
         .giveaway-hero-img {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .giveaway-hero-img::before,
+        .giveaway-hero-img::after {
+            content: '✦';
+            position: absolute;
+            color: #cb8a19;
+            font-size: 13px;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+        .giveaway-hero-img::before { top: 2px; right: 4px; animation-delay: 0s; }
+        .giveaway-hero-img::after  { bottom: 10px; left: 2px; animation-delay: 0.8s; font-size: 9px; }
+        @keyframes trophy-float {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-6px); }
+        }
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.25; transform: scale(0.5); }
+        }
+        .giveaway-hero-img img {
+            width: 70px !important;
+            height: 70px !important;
+            object-fit: contain;
+            filter: drop-shadow(0 0 14px rgba(203,138,25,0.75));
+            animation: trophy-float 3s ease-in-out infinite;
+        }
+
+        /* kept for reference */
+        .giveaway-hero-img-old {
             width: 110px;
             height: 110px;
             flex-shrink: 0;
@@ -257,7 +287,6 @@ document.addEventListener('touchstart', function(){}, { passive: true });
             align-items: center;
             justify-content: center;
         }
-        .giveaway-hero-img svg, .giveaway-hero-img img { width: 100%; height: 100%; }
 
         /* ── SECTION LABEL ── */
         .section-label {
@@ -500,10 +529,10 @@ document.addEventListener('touchstart', function(){}, { passive: true });
     <div class="giveaway-hero">
         <div class="giveaway-hero-text">
             <div class="giveaway-hero-title">Участвуй в<br><span>РОЗЫГРЫШАХ</span></div>
-            <div class="giveaway-hero-sub">И выигрывай ценные<br>призы!</div>
+            <div class="giveaway-hero-sub">И выигрывай ценные призы!</div>
         </div>
         <div class="giveaway-hero-img">
-            <img src="https://cdn.changes.tg/gifts/originals/5168043875654172773/Original.png" alt="pepe-Frozen">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Gold_trophy_cup.png/240px-Gold_trophy_cup.png" alt="trophy">
         </div>
     </div>
 
