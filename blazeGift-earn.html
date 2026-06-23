@@ -20,23 +20,31 @@
         }
 
         html, body {
-            background-color: #0a0a0a;
-            overflow: hidden;
-            position: fixed;
-            width: 100%;
             height: 100%;
+            background-color: #0a0a0a;
             font-family: "Poppins", sans-serif;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         /* ── TOPBAR ── */
         .topbar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px;
-    background: #0a0a0a;
-    padding-top: 80px;
-}
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px;
+            padding-top: 80px;
+            background: #0a0a0a;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* compensate for fixed topbar */
+        .topbar-spacer {
+            height: calc(80px + 52px + 14px);
+        }
 
         /* ── Пополнить бтн ── */
         .deposit-btn {
@@ -309,6 +317,37 @@
             cursor: default;
         }
 
+        /* ── EARN HERO (above tabs, always visible) ── */
+        .earn-hero {
+            margin: 14px 12px 0;
+            background: #141414;
+            border-radius: 18px;
+            border: 1.5px solid rgba(255,255,255,0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px 24px 28px;
+            gap: 10px;
+        }
+
+        .earn-hero-icon {
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            background: #cb8a19;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 6px;
+        }
+        .earn-hero-icon i { font-size: 36px; color: #fff; }
+
+        .earn-hero-title {
+            color: #fff; font-size: 24px; font-weight: 800;
+            text-align: center; line-height: 1.2;
+        }
+        .earn-hero-sub {
+            color: #888; font-size: 14px; font-weight: 400;
+            text-align: center; line-height: 1.5;
+        }
+
         /* рефка */
         .ref-section { padding: 16px 12px 0; display: flex; flex-direction: column; gap: 12px; }
 
@@ -545,8 +584,19 @@
     </div>
   </div>
 
+<!-- spacer for fixed topbar -->
+<div class="topbar-spacer"></div>
 
 <div class="page-content">
+
+    <!-- Earn Hero (always visible, above tabs) -->
+    <div class="earn-hero" id="earn-hero">
+        <div class="earn-hero-icon">
+            <i class="ti ti-users"></i>
+        </div>
+        <div class="earn-hero-title">Приглашай друзей</div>
+        <div class="earn-hero-sub">И получай 10% от их депозитов на свой баланс</div>
+    </div>
 
     <div class="tabs-wrap">
         <div class="tabs-container">
@@ -557,18 +607,13 @@
 
     <!-- TASKS -->
     <div id="tab-tasks" class="panel">
-        <div class="hero-card">
-            <div class="hero-icon-wrap">
-                <i class="ti ti-clipboard-list"></i>
-            </div>
-            <div class="hero-title">Выполняй задания</div>
-            <div class="hero-subtitle">И получай за это хорошие награды</div>
-        </div>
+        <!-- ДУБЛЬ УДАЛЁН: hero-card убран, остался только общий earn-hero выше -->
 
         <div class="tasks-section">
+            <!-- ЗАДАНИЕ 1: замени путь к картинке ниже -->
             <div class="task-card">
-                <div class="task-icon-wrap">
-                    <i class="ti ti-brand-telegram"></i>
+                <div class="task-icon-wrap" style="background:transparent;overflow:hidden;">
+                    <img src="ПУТЬ_К_КАРТИНКЕ_1.png" alt="task icon" style="width:48px;height:48px;object-fit:cover;border-radius:50%;">
                 </div>
                 <div class="task-info">
                     <div class="task-title">Подпишись на нас</div>
@@ -579,9 +624,10 @@
                 <button class="task-btn" onclick="doTask(this,'https://t.me/blazegift_news')">Начать</button>
             </div>
 
+            <!-- ЗАДАНИЕ 2: замени путь к картинке ниже -->
             <div class="task-card">
-                <div class="task-icon-wrap" style="background:#0098EA;">
-                    <i class="ti ti-brand-telegram"></i>
+                <div class="task-icon-wrap" style="background:transparent;overflow:hidden;">
+                    <img src="ПУТЬ_К_КАРТИНКЕ_2.png" alt="task icon" style="width:48px;height:48px;object-fit:cover;border-radius:50%;">
                 </div>
                 <div class="task-info">
                     <div class="task-title">Подпишись на нас</div>
@@ -592,9 +638,10 @@
                 <button class="task-btn" onclick="doTask(this,'https://t.me/blazegift_news')">Начать</button>
             </div>
 
+            <!-- ЗАДАНИЕ 3: замени путь к картинке ниже -->
             <div class="task-card">
-                <div class="task-icon-wrap" style="background:#0098EA;">
-                    <i class="ti ti-brand-telegram"></i>
+                <div class="task-icon-wrap" style="background:transparent;overflow:hidden;">
+                    <img src="ПУТЬ_К_КАРТИНКЕ_3.png" alt="task icon" style="width:48px;height:48px;object-fit:cover;border-radius:50%;">
                 </div>
                 <div class="task-info">
                     <div class="task-title">Подпишись на нас</div>
@@ -610,14 +657,6 @@
     <!-- REF -->
     <div id="tab-ref" class="panel active">
         <div class="ref-section">
-
-            <div class="ref-hero-card">
-                <div class="ref-hero-icon">
-                    <i class="ti ti-users"></i>
-                </div>
-                <div class="ref-hero-title">Приглашай друзей</div>
-                <div class="ref-hero-sub">И получай 10% от их депозитов на свой баланс</div>
-            </div>
 
             <div class="ref-action-row">
                 <button class="ref-invite-btn" id="inviteBtn">Пригласить</button>
@@ -691,12 +730,32 @@ if (tgUser) {
     }
 }
 
+const heroData = {
+    ref: {
+        icon: 'ti-users',
+        title: 'Приглашай друзей',
+        sub: 'И получай 10% от их депозитов на свой баланс'
+    },
+    tasks: {
+        icon: 'ti-clipboard-list',
+        title: 'Выполняй задания',
+        sub: 'И получай за это хорошие награды'
+    }
+};
+
 function switchTab(tab) {
     document.querySelectorAll('.tab-btn').forEach((b, i) => {
         b.classList.toggle('active', (i === 0 && tab === 'ref') || (i === 1 && tab === 'tasks'));
     });
     document.getElementById('tab-tasks').classList.toggle('active', tab === 'tasks');
     document.getElementById('tab-ref').classList.toggle('active', tab === 'ref');
+
+    // Update hero banner
+    const d = heroData[tab];
+    const hero = document.getElementById('earn-hero');
+    hero.querySelector('.earn-hero-icon i').className = 'ti ' + d.icon;
+    hero.querySelector('.earn-hero-title').textContent = d.title;
+    hero.querySelector('.earn-hero-sub').textContent = d.sub;
 }
 
 function doTask(btn, url) {
