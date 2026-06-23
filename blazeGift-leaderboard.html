@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BlazeGift.up — Лидерборд</title>
+    <title>BlazeGift.up — Розыгрыши</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js">
+document.addEventListener('touchstart', function(){}, { passive: true });
+
+</script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
@@ -37,7 +40,8 @@
             box-shadow: none !important;
         }
 
-        /* ── TOPBAR — FIXED ── */
+
+        /* ── TOP BAR ── */
         .topbar {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -55,7 +59,9 @@
         .topbar-spacer {
             height: calc(80px + 52px + 14px);
         }
+            
 
+        /* ── КНОПКА ПОПОЛНИТЬ ── */
         .deposit-btn {
             background: #cb8a19;
             border: none;
@@ -77,6 +83,7 @@
             transform: scale(0.96);
         }
 
+        /* ── БАЛАНС ── */
         .balance-chip {
             display: flex;
             align-items: center;
@@ -97,9 +104,13 @@
             white-space: nowrap;
         }
 
-        .ton-icon { width: 20px; height: 20px; flex-shrink: 0; }
-        .ton-icon-sm { width: 16px; height: 16px; flex-shrink: 0; }
+        .ton-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
 
+        /* ── АВАТАРКА ── */
         .avatar-wrap {
             width: 52px;
             height: 52px;
@@ -120,8 +131,17 @@
             border-color: rgba(255, 255, 255, 0.35);
         }
 
-        .avatar-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .avatar-placeholder i { font-size: 20px; color: #888; }
+        .avatar-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .avatar-placeholder i {
+            font-size: 20px;
+            color: #888;
+        }
 
         .avatar-initials {
             font-size: 16px;
@@ -130,77 +150,28 @@
             font-family: "Poppins", sans-serif;
         }
 
-        /* ── PAGE ── */
+        button, a {
+            -webkit-tap-highlight-color: transparent !important;
+            outline: none !important;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        button:focus, button:active, button:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
         .page-content {
-            padding-top: 0;
-            padding-bottom: 110px;
-            width: 100%;
+    padding-top: 0;
+    padding-bottom: 110px;
+    width: 100%;
         }
 
-        /* ── HERO HEADER ── */
-        .lb-hero {
-            padding: 16px 16px 0;
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-        }
 
-        .lb-hero-title {
-            color: #fff;
-            font-size: 30px;
-            font-weight: 800;
-            line-height: 1.1;
-        }
-
-        .lb-hero-sub {
-            color: #888;
-            font-size: 13px;
-            font-weight: 400;
-            margin-top: 4px;
-        }
-
-        .lb-trophy-wrap {
-            width: 80px;
-            height: 80px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .lb-trophy-wrap img {
-            width: 70px;
-            height: 70px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 14px rgba(203,138,25,0.75));
-            animation: trophy-float 3s ease-in-out infinite;
-        }
-
-        .lb-trophy-wrap::before,
-        .lb-trophy-wrap::after {
-            content: '✦';
-            position: absolute;
-            color: #cb8a19;
-            font-size: 13px;
-            animation: sparkle 2s ease-in-out infinite;
-        }
-
-        .lb-trophy-wrap::before { top: 2px; right: 4px; animation-delay: 0s; }
-        .lb-trophy-wrap::after  { bottom: 10px; left: 2px; animation-delay: 0.8s; font-size: 9px; }
-
-        @keyframes trophy-float {
-            0%, 100% { transform: translateY(0); }
-            50%       { transform: translateY(-6px); }
-        }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50%       { opacity: 0.25; transform: scale(0.5); }
-        }
 
         /* ── TABS ── */
-        .tabs-wrap { padding: 16px 12px 0; }
+        .tabs-wrap { padding: 14px 12px 0; }
 
         .tabs-container {
             background: #1c1c1e;
@@ -227,9 +198,7 @@
             -webkit-tap-highlight-color: transparent !important;
             user-select: none;
         }
-
         .tab-btn.active { background: #2c2c2e; color: #fff; }
-
         .tab-btn.active::after {
             content: '';
             position: absolute;
@@ -242,150 +211,181 @@
             border-radius: 2px;
         }
 
-        /* ── LEADERBOARD LIST ── */
-        .lb-list {
-            padding: 14px 12px 0;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
+        .panel { display: none; }
+        .panel.active { display: block; }
 
-        .lb-row {
+        /* ── HERO BANNER ── */
+        .giveaway-hero {
+            margin: 14px 12px 0;
             background: #141414;
-            border-radius: 16px;
-            border: 1.5px solid rgba(255,255,255,0.07);
+            border-radius: 18px;
+            border: 1.5px solid rgba(255,255,255,0.08);
             display: flex;
             align-items: center;
-            padding: 12px 14px;
+            justify-content: space-between;
+            padding: 24px;
             gap: 12px;
-            transition: transform 0.1s;
+            overflow: hidden;
         }
 
-        .lb-row:active { transform: scale(0.98); }
-
-        .lb-row.rank-1 { border-color: #cb8a19; background: rgba(203,138,25,0.07); }
-        .lb-row.rank-2 { border-color: rgba(180,180,180,0.4); background: rgba(180,180,180,0.04); }
-        .lb-row.rank-3 { border-color: rgba(160,100,40,0.6); background: rgba(160,100,40,0.06); }
-
-        /* rank wrap: number on top, trophy icon below */
-        .lb-rank-wrap {
-            width: 32px;
+        .giveaway-hero-text {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 1px;
-            flex-shrink: 0;
+            gap: 10px;
         }
 
-        .lb-rank-num {
+        .giveaway-hero-title {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        .giveaway-hero-title span { color: #dd9417; }
+
+        .giveaway-hero-sub {
+            color: #888;
             font-size: 13px;
-            font-weight: 700;
-            line-height: 1;
+            font-weight: 400;
+            line-height: 1.5;
         }
 
-        .lb-rank-num.grey   { color: #555; }
-        .lb-rank-num.gold   { color: #cb8a19; }
-        .lb-rank-num.silver { color: #b0b0b0; }
-        .lb-rank-num.bronze { color: #a06428; }
-
-        /* column header row */
-        .lb-header {
-            display: flex;
-            align-items: center;
-            padding: 8px 26px 2px;
-            gap: 12px;
-        }
-        .lb-header-rank {
-            width: 32px;
-            flex-shrink: 0;
-            font-size: 11px;
-            font-weight: 600;
-            color: #555;
-            text-align: center;
-        }
-        .lb-header-user {
-            flex: 1;
-            font-size: 11px;
-            font-weight: 600;
-            color: #555;
-            padding-left: 56px;
-        }
-
-        /* Avatar */
-        .lb-avatar {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: #2a2a2a;
-            border: 2px solid rgba(255,255,255,0.08);
-            overflow: hidden;
+        .giveaway-hero-img {
+            width: 110px;
+            height: 110px;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
         }
+        .giveaway-hero-img svg, .giveaway-hero-img img { width: 100%; height: 100%; }
 
-        .lb-avatar img { width: 100%; height: 100%; object-fit: cover; }
-
-        .lb-avatar-letter {
+        /* ── SECTION LABEL ── */
+        .section-label {
+            color: #fff;
             font-size: 16px;
             font-weight: 700;
-            color: #666;
+            padding: 20px 12px 10px;
         }
 
-        .lb-name {
+        /* ── GIVEAWAY LIST ── */
+        .giveaway-list {
+            padding: 0 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .giveaway-card {
+            background: #141414;
+            border-radius: 18px;
+            border: 1.5px solid rgba(255,255,255,0.08);
+            padding: 18px;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .giveaway-card-left {
             flex: 1;
-            color: #fff;
-            font-size: 15px;
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-width: 0;
         }
 
-        .lb-amount {
+        .giveaway-timer {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #1c1c1e;
+            border: 1.5px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 5px 10px;
+            color: #ccc;
+            font-size: 12px;
+            font-weight: 600;
+            width: fit-content;
+        }
+        .giveaway-timer i { font-size: 13px; color: #888; }
+
+        .giveaway-name {
+            color: #fff;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .giveaway-tickets-total {
+            color: #777;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .giveaway-progress-track {
+            width: 100%;
+            height: 5px;
+            background: #262626;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .giveaway-progress-fill {
+            height: 100%;
+            background: #e0930f;
+            border-radius: 4px;
+        }
+
+        .giveaway-tickets-current {
+            color: #888;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .giveaway-join-btn {
+            background: #cb8a19;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 11px 0;
+            font-size: 14px;
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 2px;
+            transition: background 0.2s, transform 0.1s;
+            outline: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+            user-select: none;
+        }
+        .giveaway-join-btn:active { background: #a97316; transform: scale(0.97); }
+
+        .giveaway-card-img {
+            width: 125px;
+            height: 125px;
+            flex-shrink: 0;
             display: flex;
             align-items: center;
-            gap: 5px;
-            color: #fff;
-            font-size: 14px;
-            font-weight: 700;
-            white-space: nowrap;
-            flex-shrink: 0;
+            justify-content: center;
         }
+        .giveaway-card-img svg, .giveaway-card-img img { width: 100%; height: 100%; }
 
-        /* ── YOUR POSITION — inline ── */
-        .lb-my-bar {
-            margin: 8px 12px 0;
-            background: #0f0f0f;
-            border-top: 1.5px solid rgba(255,255,255,0.12);
-            border-radius: 16px;
-            padding: 10px 12px;
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 60px 20px;
+            color: #6e4b0a;
         }
-
-        .lb-my-label {
-            color: #888;
-            font-size: 11px;
-            font-weight: 500;
-            margin-bottom: 6px;
-            padding-left: 2px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .lb-row.mine {
-            border: 2px solid rgba(0, 152, 234, 0.6);
-            background: rgba(0, 152, 234, 0.07);
-            box-shadow: 0 0 12px rgba(0, 152, 234, 0.15);
-            margin: 0;
-        }
-
-        .lb-rank-num.blue { color: #0098EA; font-size: 15px; }
+        .empty-state i { font-size: 42px; }
+        .empty-state p { font-size: 14px; font-weight: 500; }
 
         /* ── NAV BAR ── */
         .nav-bar {
             position: fixed;
-            bottom: 0; left: 0; right: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
             display: flex;
             align-items: center;
             justify-content: space-around;
@@ -411,12 +411,14 @@
             background: none;
             outline: none !important;
         }
-
         .nav-item:active { transform: scale(0.88); }
 
         .icon-wrap {
-            width: 40px; height: 34px;
-            display: flex; align-items: center; justify-content: center;
+            width: 40px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border-radius: 12px;
             transition: background 0.2s;
             position: relative;
@@ -424,41 +426,51 @@
 
         .nav-item i { font-size: 23px; color: #4a4a4a; transition: color 0.2s; }
         .nav-item span {
-            font-size: 10px; color: #4a4a4a;
-            font-weight: 400; font-family: "Poppins", sans-serif;
-            transition: color 0.2s; white-space: nowrap;
+            font-size: 10px;
+            color: #4a4a4a;
+            font-weight: 400;
+            font-family: "Poppins", sans-serif;
+            transition: color 0.2s;
+            white-space: nowrap;
         }
 
-        .nav-item.active .icon-wrap { background: rgba(203,138,25,0.13); }
-        .nav-item.active i, .nav-item.active span { color: #cb8a19; }
+        .nav-item.active .icon-wrap { background: rgba(255,160,0,0.13); }
+        .nav-item.active i,
+        .nav-item.active span { color: #ffa000; }
         .nav-item.active span { font-weight: 600; }
 
         .nav-item.active .icon-wrap::before {
             content: '';
             position: absolute;
-            top: -8px; left: 50%;
+            top: -8px;
+            left: 50%;
             transform: translateX(-50%);
-            width: 22px; height: 3px;
-            background: #cb8a19;
+            width: 22px;
+            height: 3px;
+            background: #ffa000;
             border-radius: 0 0 4px 4px;
         }
 
         .badge {
-            position: absolute; top: 1px; right: 1px;
-            width: 8px; height: 8px;
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            width: 8px;
+            height: 8px;
             background: #e53935;
             border-radius: 50%;
             border: 1.5px solid #141414;
         }
+    
+.deposit-btn,
+.avatar-wrap,
+.nav-item,
+.tab-btn,
+.giveaway-join-btn {
+    touch-action: manipulation;
+}
 
-        .deposit-btn,
-        .avatar-wrap,
-        .nav-item,
-        .tab-btn,
-        .lb-row {
-            touch-action: manipulation;
-        }
-    </style>
+</style>
 </head>
 <body ontouchstart="">
 
@@ -474,7 +486,7 @@
         <span id="balance-amount">0.00</span>
     </div>
 
-    <div class="avatar-wrap" id="user-icon" onclick="window.location.href='blazeGift-profile.html'">
+    <div class="avatar-wrap" id="user-icon" onclick="window.location.href='index.html'">
         <div class="avatar-placeholder"><i class="ti ti-user"></i></div>
     </div>
 </div>
@@ -482,49 +494,74 @@
 <!-- spacer for fixed topbar -->
 <div class="topbar-spacer"></div>
 
-<!-- PAGE CONTENT -->
 <div class="page-content">
 
-    <!-- HERO -->
-    <div class="lb-hero">
-        <div class="lb-hero-text">
-            <div class="lb-hero-title">Лидерборд</div>
-            <div class="lb-hero-sub">Зарабатывай и поднимайся в рейтинге!</div>
+    <!-- Hero banner (always visible, above tabs) -->
+    <div class="giveaway-hero">
+        <div class="giveaway-hero-text">
+            <div class="giveaway-hero-title">Участвуй в<br><span>РОЗЫГРЫШАХ</span></div>
+            <div class="giveaway-hero-sub">И выигрывай ценные<br>призы!</div>
         </div>
-        <div class="lb-trophy-wrap">
-            <img src="https://cdn.changes.tg/gifts/originals/5168043875654172773/Original.png" alt="trophy">
+        <div class="giveaway-hero-img">
+            <img src="https://cdn.changes.tg/gifts/originals/5168043875654172773/Original.png" alt="pepe-Frozen">
         </div>
     </div>
 
     <!-- TABS -->
     <div class="tabs-wrap">
         <div class="tabs-container">
-            <button class="tab-btn active" onclick="switchTab('month')">За месяц</button>
-            <button class="tab-btn" onclick="switchTab('alltime')">За всё время</button>
+            <button class="tab-btn active" onclick="switchTab('active')">Активные</button>
+            <button class="tab-btn" onclick="switchTab('finished')">Завершённые</button>
         </div>
     </div>
 
-    <!-- LEADERBOARD LIST -->
-    <div class="lb-list" id="lb-list"></div>
+    <!-- ACTIVE PANEL -->
+    <div id="tab-active" class="panel active">
 
-    <!-- YOUR POSITION (inline at the end) -->
-    <div class="lb-my-bar">
-        <div class="lb-my-label">Ваша позиция</div>
-        <div class="lb-row mine">
-            <div class="lb-rank-wrap">
-                <span class="lb-rank-num blue" id="my-rank">145</span>
+        <div class="section-label">Активные розыгрыши</div>
+
+        <div class="giveaway-list">
+
+            <div class="giveaway-card">
+                <div class="giveaway-card-left">
+                    <div class="giveaway-timer"><i class="ti ti-clock"></i> <span class="timer-val" data-end="1000">00:16:36</span></div>
+                    <div class="giveaway-name">Plush Pepe Frozen</div>
+                    <div class="giveaway-tickets-total">Всего билетов: 5000</div>
+                    <div class="giveaway-progress-track">
+                        <div class="giveaway-progress-fill" style="width:25%;"></div>
+                    </div>
+                    <div class="giveaway-tickets-current">1250 / 5000 билетов</div>
+                    <button class="giveaway-join-btn" onclick="joinGiveaway(this)">Участвовать</button>
+                </div>
+                <div class="giveaway-card-img">
+                    <img src="https://cdn.changes.tg/gifts/models/Plush%20Pepe/png/Frozen.png" alt="pepe-Frozen">
+                </div>
             </div>
-            <div class="lb-avatar" id="my-avatar">
-                <i class="ti ti-user" style="font-size:20px;color:#555;"></i>
+
+            <div class="giveaway-card">
+                <div class="giveaway-card-left">
+                    <div class="giveaway-timer"><i class="ti ti-clock"></i> <span class="timer-val" data-end="1542">00:25:42</span></div>
+                    <div class="giveaway-name">Ginie Lamp Ice</div>
+                    <div class="giveaway-tickets-total">Всего билетов: 100</div>
+                    <div class="giveaway-progress-track">
+                        <div class="giveaway-progress-fill" style="width:45%;"></div>
+                    </div>
+                    <div class="giveaway-tickets-current">45 / 100 билетов</div>
+                    <button class="giveaway-join-btn" onclick="joinGiveaway(this)">Участвовать</button>
+                </div>
+                <div class="giveaway-card-img">
+                    <img src="https://cdn.changes.tg/gifts/models/Genie%20Lamp/png/Arctic%20Winds.png" alt="pepe-Frozen">
+                </div>
             </div>
-            <div class="lb-name" id="my-name">Вы</div>
-            <div class="lb-amount">
-                <span id="my-amount">215.10</span>
-                <svg class="ton-icon-sm" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="28" cy="28" r="28" fill="#0098EA"/>
-                    <path d="M37.5603 15.6277H18.4386C14.9228 15.6277 12.6928 19.4202 14.4603 22.4797L26.6457 43.9782C27.3139 45.1302 28.9937 45.1302 29.6547 43.9782L41.8474 22.4797C43.6149 19.4202 41.378 15.6277 37.5603 15.6277ZM26.2098 39.1811L23.9798 34.7511L17.1447 22.4797C16.8861 22.0271 17.2121 21.4534 17.7367 21.4534H26.2098V39.1811ZM38.8409 22.4797L32.0131 34.7511L29.7831 39.1811V21.4534H38.2561C38.7808 21.4534 39.1068 22.0271 38.8482 22.4797H38.8409Z" fill="white"/>
-                </svg>
-            </div>
+
+        </div>
+    </div>
+
+    <!-- FINISHED PANEL -->
+    <div id="tab-finished" class="panel">
+        <div class="empty-state">
+            <i class="ti ti-history"></i>
+            <p>Завершённых розыгрышей пока нет</p>
         </div>
     </div>
 
@@ -532,7 +569,7 @@
 
 <!-- NAV BAR -->
 <nav class="nav-bar" role="navigation">
-    <button class="nav-item" data-page="blazeGift-giveaways.html" onclick="navigate(this)">
+    <button class="nav-item active" data-page="blazeGift-giveaways.html" onclick="navigate(this)">
         <div class="icon-wrap"><i class="ti ti-gift"></i><span class="badge"></span></div>
         <span>Розыгрыши</span>
     </button>
@@ -544,7 +581,7 @@
         <div class="icon-wrap"><i class="ti ti-home"></i></div>
         <span>Игры</span>
     </button>
-    <button class="nav-item active" data-page="blazeGift-leaderboard.html" onclick="navigate(this)">
+    <button class="nav-item" data-page="blazeGift-leaderboard.html" onclick="navigate(this)">
         <div class="icon-wrap"><i class="ti ti-trophy"></i></div>
         <span>Лидерборд</span>
     </button>
@@ -555,110 +592,60 @@
 </nav>
 
 <script>
+// ── ПОЛЬЗОВАТЕЛЬ ──
 const tg = window.Telegram?.WebApp;
 const tgUser = tg?.initDataUnsafe?.user;
-
 const iconEl = document.getElementById('user-icon');
 
-if (tgUser) {
-    if (tgUser.photo_url) {
-        iconEl.innerHTML = `<img src="${tgUser.photo_url}" alt="avatar">`;
-        document.getElementById('my-avatar').innerHTML = `<img src="${tgUser.photo_url}" alt="me">`;
-    } else {
-        const initials = (tgUser.first_name?.[0] ?? '') + (tgUser.last_name?.[0] ?? '');
-        iconEl.innerHTML = `<div class="avatar-initials">${initials}</div>`;
-        document.getElementById('my-avatar').innerHTML = `<div class="lb-avatar-letter">${initials}</div>`;
-    }
-    const displayName = tgUser.username
-        ? `@${tgUser.username}`
-        : `${tgUser.first_name ?? ''}${tgUser.last_name ? ' ' + tgUser.last_name : ''}`.trim() || 'Вы';
-    document.getElementById('my-name').textContent = displayName;
+if (tgUser?.photo_url) {
+    iconEl.innerHTML = `<img src="${tgUser.photo_url}" alt="avatar">`;
 }
 
-// ── Demo data ──
-const demoMonth = [
-    { name: 'Night',    amount: 1250.50 },
-    { name: 'Skils', amount: 980.10  },
-    { name: 'Zeniks',  amount: 745.75  },
-    { name: 'Tigr',   amount: 510.30  },
-    { name: 'Aslan',    amount: 490.00  },
-    { name: 'Balenciaga',  amount: 370.30  },
-    { name: 'Slider',   amount: 360.00  },
-    { name: 'Svin',   amount: 340.00  },
-    { name: 'Crepeer', amount: 320.00  },
-    { name: 'Blaze',   amount: 298.50  },
-];
-
-const demoAll = [
-    { name: 'Night',    amount: 9800.00 },
-    { name: 'Skils',  amount: 7420.50 },
-    { name: 'Zeniks', amount: 6300.10 },
-    { name: 'Svin',   amount: 4900.30 },
-    { name: 'Aslan', amount: 3870.00 },
-    { name: 'Tigr',    amount: 3500.00 },
-    { name: 'Crepeer',  amount: 2990.30 },
-    { name: 'Balenciaga',   amount: 2740.00 },
-    { name: 'Blaze',   amount: 2560.00 },
-    { name: 'Slider',   amount: 2310.00 },
-];
-
-const tonSVG = `<svg class="ton-icon-sm" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="28" cy="28" r="28" fill="#0098EA"/>
-    <path d="M37.5603 15.6277H18.4386C14.9228 15.6277 12.6928 19.4202 14.4603 22.4797L26.6457 43.9782C27.3139 45.1302 28.9937 45.1302 29.6547 43.9782L41.8474 22.4797C43.6149 19.4202 41.378 15.6277 37.5603 15.6277ZM26.2098 39.1811L23.9798 34.7511L17.1447 22.4797C16.8861 22.0271 17.2121 21.4534 17.7367 21.4534H26.2098V39.1811ZM38.8409 22.4797L32.0131 34.7511L29.7831 39.1811V21.4534H38.2561C38.7808 21.4534 39.1068 22.0271 38.8482 22.4797H38.8409Z" fill="white"/>
-</svg>`;
-
-const rankMeta = [
-    { numCls: 'gold',   trophyCls: 'gold',   rowCls: 'rank-1' },
-    { numCls: 'silver', trophyCls: 'silver',  rowCls: 'rank-2' },
-    { numCls: 'bronze', trophyCls: 'bronze',  rowCls: 'rank-3' },
-];
-
-function renderList(data) {
-    const header = `<div class="lb-header">
-        <div class="lb-header-rank">№</div>
-        <div class="lb-header-user">Пользователь</div>
-    </div>`;
-
-    const rows = data.map((entry, i) => {
-        const rank = i + 1;
-        const meta = i < 3 ? rankMeta[i] : { numCls: 'grey', rowCls: '' };
-        const letter = entry.name?.[0]?.toUpperCase() ?? '?';
-        const avatarHtml = entry.avatar
-            ? `<img src="${entry.avatar}" alt="${entry.name}">`
-            : `<div class="lb-avatar-letter">${letter}</div>`;
-
-        return `
-        <div class="lb-row ${meta.rowCls}">
-            <div class="lb-rank-wrap">
-                <span class="lb-rank-num ${meta.numCls}">${rank}.</span>
-            </div>
-            <div class="lb-avatar">${avatarHtml}</div>
-            <div class="lb-name">${entry.name}</div>
-            <div class="lb-amount">${entry.amount.toFixed(2)} ${tonSVG}</div>
-        </div>`;
-    }).join('');
-
-    document.getElementById('lb-list').innerHTML = header + rows;
-}
-
+// ── TABS ──
 function switchTab(tab) {
     document.querySelectorAll('.tab-btn').forEach((b, i) => {
-        b.classList.toggle('active', (i === 0 && tab === 'month') || (i === 1 && tab === 'alltime'));
+        b.classList.toggle('active', (i === 0 && tab === 'active') || (i === 1 && tab === 'finished'));
     });
-    renderList(tab === 'month' ? demoMonth : demoAll);
+    document.getElementById('tab-active').classList.toggle('active', tab === 'active');
+    document.getElementById('tab-finished').classList.toggle('active', tab === 'finished');
 }
 
+// ── ТАЙМЕРЫ ──
+function formatTime(s) {
+    const h = String(Math.floor(s / 3600)).padStart(2, '0');
+    const m = String(Math.floor((s % 3600) / 60)).padStart(2, '0');
+    const sec = String(s % 60).padStart(2, '0');
+    return `${h}:${m}:${sec}`;
+}
+
+document.querySelectorAll('.timer-val').forEach(el => {
+    let remaining = parseInt(el.dataset.end, 10);
+    el.textContent = formatTime(remaining);
+    setInterval(() => {
+        if (remaining > 0) {
+            remaining--;
+            el.textContent = formatTime(remaining);
+        }
+    }, 1000);
+});
+
+// ── УЧАСТИЕ В РОЗЫГРЫШЕ ──
+function joinGiveaway(btn) {
+    btn.textContent = 'Вы участвуете ✓';
+    btn.disabled = true;
+    btn.style.background = '#1e1e1e';
+    btn.style.color = '#888';
+}
+
+// ── НАВИГАЦИЯ ──
 function navigate(button) {
     document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
     button.classList.add('active');
     window.location.href = button.dataset.page;
 }
 
-document.getElementById('balance-amount').textContent = '0.00';
-
-renderList(demoMonth);
-
 document.addEventListener('touchstart', function(){}, { passive: true });
+
 </script>
 
 </body>
